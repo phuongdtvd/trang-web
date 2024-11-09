@@ -1,5 +1,6 @@
 import { google } from 'googleapis';
 import GoogleFormEmbed from './GoogleFormEmbed';
+import { GoogleAuth } from 'google-auth-library';
 
 const formUrls = [
   'https://docs.google.com/forms/d/e/1FAIpQLSeWJ77Z7_--0EIeJmXldnR5k9cUgpZG6-rSt3vZeL43VlzNrQ/viewform',
@@ -8,10 +9,29 @@ const formUrls = [
   'https://docs.google.com/forms/d/e/1FAIpQLSe-DRtlQH7-vClWemkF4ryVfgXC_FCxQt2u4WvOJTHmPrSqjQ/viewform',
 ];
 
+const serviceAccount = {
+  type: 'service_account',
+  project_id: process.env.GOOGLE_PROJECT_ID,
+  private_key_id: process.env.GOOGLE_PRIVATE_KEY_ID,
+  private_key: process.env.GOOGLE_PRIVATE_KEY.replace(/\\n/g, '\n'),
+  client_email: process.env.GOOGLE_CLIENT_EMAIL,
+  client_id: process.env.GOOGLE_CLIENT_ID,
+  auth_uri: process.env.AUTH_URI,
+  token_uri: process.env.TOKEN_URI,
+  auth_provider_x509_cert_url: process.env.AUTH_PROVIDER,
+  client_x509_cert_url: process.env.CLIENT_CERT,
+};
+
+console.log(serviceAccount)
+
+const auth = new GoogleAuth({
+  credentials: serviceAccount,
+  scopes: ['https://www.googleapis.com/auth/spreadsheets.readonly'], // Use specific scope
+});
+
 const sheetNames = ['Sheet1', 'Sheet2', 'Sheet3', 'Sheet4'];
 
 async function fetchAvailableForms() {
-  const auth = await google.auth.getClient({ scopes: ['https://www.googleapis.com/auth/spreadsheets.readonly'] });
   const sheets = google.sheets({ version: 'v4', auth });
 
   const availableForms = [];
