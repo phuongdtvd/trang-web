@@ -1,6 +1,7 @@
 import { google } from 'googleapis';
 import GoogleFormEmbed from './GoogleFormEmbed';
 import { GoogleAuth } from 'google-auth-library';
+import Head from 'next/head';
 
 const formUrls = [
   'https://docs.google.com/forms/d/e/1FAIpQLSeWJ77Z7_--0EIeJmXldnR5k9cUgpZG6-rSt3vZeL43VlzNrQ/viewform',
@@ -57,8 +58,13 @@ export default async function HomePage() {
   const availableForms = await fetchAvailableForms();
 
   return (
-    <div>
-      <GoogleFormEmbed availableForms={availableForms} />
-    </div>
+    <>
+      <Head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      </Head>
+      <div>
+        <GoogleFormEmbed availableForms={availableForms} />
+      </div>
+    </>
   );
 }

@@ -1,29 +1,11 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
-/* You can add this CSS to your global styles or a module CSS file */
-
-/* Add this to your global CSS or in a CSS module corresponding to the component */
-
 body {
-  background-color: #f4f4f4; /* Light gray color similar to Google's form background */
+  background-color: var(--background);
+  color: var(--foreground);
   margin: 0;
-  font-family: Arial, sans-serif; /* Optional: Use a similar font style */
+  font-family: Arial, sans-serif;
 }
 
+/* Centered container for the form */
 .centered-container {
   display: flex;
   justify-content: center;
@@ -31,14 +13,22 @@ body {
   min-height: 100vh;
   padding: 20px;
   box-sizing: border-box;
-  background-color: #f4f4f4; /* Ensure the container matches the page background */
+  background-color: var(--background);
 }
 
+/* Responsive iframe for form embed */
 .responsive-iframe {
-  width: 80%;
+  width: 100%;
   height: 80vh;
   max-width: 1000px;
   border: none;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Add a subtle shadow for depth */
-  border-radius: 8px; /* Optional: Rounded corners for a softer look */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}
+
+/* Media query for smaller screens */
+@media (max-width: 768px) {
+  .responsive-iframe {
+    height: 100vh; /* Use full height on smaller screens */
+  }
 }
