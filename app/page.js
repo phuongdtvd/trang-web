@@ -22,8 +22,6 @@ const serviceAccount = {
   client_x509_cert_url: process.env.CLIENT_CERT,
 };
 
-console.log(serviceAccount)
-
 const auth = new GoogleAuth({
   credentials: serviceAccount,
   scopes: ['https://www.googleapis.com/auth/spreadsheets.readonly'], // Use specific scope
@@ -45,8 +43,6 @@ async function fetchAvailableForms() {
     });
 
     const numResponses = response.data.values ? response.data.values.length : 0;
-
-    console.log(numResponses)
 
     // Assuming the first row is a header
     if (numResponses < 31) {
