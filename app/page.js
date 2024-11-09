@@ -1,7 +1,6 @@
 import { google } from 'googleapis';
 import GoogleFormEmbed from './GoogleFormEmbed';
 import { GoogleAuth } from 'google-auth-library';
-import Head from 'next/head';
 
 const formUrls = [
   'https://docs.google.com/forms/d/e/1FAIpQLSeWJ77Z7_--0EIeJmXldnR5k9cUgpZG6-rSt3vZeL43VlzNrQ/viewform',
@@ -22,6 +21,10 @@ const serviceAccount = {
   auth_provider_x509_cert_url: process.env.AUTH_PROVIDER,
   client_x509_cert_url: process.env.CLIENT_CERT,
 };
+
+export const metadata = {
+  title: 'Thesis Questionnaire',
+}
 
 const auth = new GoogleAuth({
   credentials: serviceAccount,
@@ -59,9 +62,6 @@ export default async function HomePage() {
 
   return (
     <>
-      <Head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      </Head>
       <div>
         <GoogleFormEmbed availableForms={availableForms} />
       </div>
