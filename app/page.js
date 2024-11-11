@@ -51,7 +51,7 @@ async function fetchAvailableForms() {
     console.log(`${sheetName}: ${numResponses -1}`)
 
     // Assuming the first row is a header
-    if (numResponses < 36) {
+    if (numResponses < 32) {
       availableForms.push(formUrls[i]);
     }
   }
